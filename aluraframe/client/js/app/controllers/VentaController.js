@@ -56,17 +56,15 @@ class VentaController {
     }
 
     importa() {
-        let request = new Request();
 
-        request.obtenerVentasSemana((err, response) => {
-            if (err) {
-                this.#mensaje.texto = err;
-            }
-            response.forEach(venta => this.#listaVentas.agrega(venta));
-            this.#mensaje.texto = 'Importación de ventas realizada!!!';
-        });
-        
-        
+        let request = new Request();
+        request
+        .obtenerVentas()
+        .then(ventas => {
+          ventas.forEach(venta => this.#listaVentas.agrega(venta));
+          this.#mensaje.texto = 'Ventas del período importadas exitosamente';
+        })
+        .catch(error => this.#mensaje.texto = error);  
     }
 
     borra() {
