@@ -4,15 +4,15 @@ var api = require('../api');
 
 module.exports  = function(app) {
     
-    app.route('/negociacoes/semana')
+    app.route('/ventas/semana')
         .get(api.listaSemana);
         
-    app.route('/negociacoes/anterior')
-        .get(api.listaAnterior);
+    app.route('/ventas/semanaanterior')
+        .get(api.listaSemanaAnterior);
         
-    app.route('/negociacoes/retrasada')
-        .get(api.listaRetrasada);  
+    app.route('/ventas/quincenaanterior')
+        .get(api.listaQuincenaAnterior);  
         
-    app.route('/negociacoes')
-        .post(api.cadastraNegociacao);          
+    app.route('/ventas')
+        .post(api.registrarventa);          
 };

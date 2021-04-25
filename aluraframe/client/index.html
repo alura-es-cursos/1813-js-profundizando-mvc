@@ -36,7 +36,7 @@
     </form>
     
     <div class="text-center">
-        <button class="btn btn-primary text-center" type="button">
+        <button class="btn btn-primary text-center" type="button" onclick="ventaController.importa();">
             Importar ventas
         </button>
         <button class="btn btn-primary text-center" type="button" onclick="ventaController.borra(event);">
@@ -60,6 +60,7 @@
     <script src="js/app/views/MensajeView.js"></script>
     <script src="js/app/services/Factory.js"></script>
     <script src="js/app/helpers/Bind.js"></script>
+    <script src="js/app/services/Request.js"></script>
 
     <script>
         let ventaController = new VentaController();

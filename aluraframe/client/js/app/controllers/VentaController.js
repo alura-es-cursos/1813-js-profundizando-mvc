@@ -55,6 +55,20 @@ class VentaController {
         this.#fecha.focus();
     }
 
+    importa() {
+        let request = new Request();
+
+        request.obtenerVentasSemana((err, response) => {
+            if (err) {
+                this.#mensaje.texto = err;
+            }
+            response.forEach(venta => this.#listaVentas.agrega(venta));
+            this.#mensaje.texto = 'Importación de ventas realizada!!!';
+        });
+        
+        
+    }
+
     borra() {
         this.#listaVentas.borra();
         
