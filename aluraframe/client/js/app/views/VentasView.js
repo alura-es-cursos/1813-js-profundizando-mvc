@@ -10,10 +10,10 @@ class VentasView extends View {
     <table class="table table-hover table-bordered">
         <thead>
             <tr>
-                <th>Fecha</th>
-                <th>Cantidad</th>
-                <th>Valor</th>
-                <th>Total</th>
+                <th onclick="ventaController.ordena('fecha')">Fecha</th>
+                <th onclick="ventaController.ordena('cantidad')">Cantidad</th>
+                <th onclick="ventaController.ordena('valor')">Valor</th>
+                <th onclick="ventaController.ordena('totalventa')">Total</th>
             </tr>
         </thead>
         

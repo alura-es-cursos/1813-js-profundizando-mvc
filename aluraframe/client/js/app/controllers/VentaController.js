@@ -6,17 +6,19 @@ class VentaController {
     #ventasView;
     #mensaje;
     #mensajeView;
+    #ordenActual;
 
     constructor() {
         let $ = document.querySelector.bind(document);
         this.#fecha = $('#fecha');
         this.#cantidad = $('#cantidad');
         this.#valor = $('#valor');
+        this.#ordenActual = ''; // cuando la página sea cargada, no hay criterio. Sólo tiene cuando el usuario haga clic en las columnas
         console.log(this);//VentaController
         
         this.#listaVentas = new Bind(new ListaVentas(),
                                 new VentasView($('#VentasView')),
-                                'agrega','borra');
+                                'agrega','borra','ordena','invierteOrden');
         
         
 
@@ -30,13 +32,13 @@ class VentaController {
         event.preventDefault();
 
         
-                            
-        this.#listaVentas.agrega(this.#creaVenta());
-        
-
-        this.#mensaje.texto = 'Operación realizada correctamente!!!';
-        
-        this.#limpiaFormulario();
+        try {
+            this.#listaVentas.agrega(this.#creaVenta());
+            this.#mensaje.texto = 'Operación realizada correctamente!!!';
+            this.#limpiaFormulario();
+        } catch (err) {
+            this.#mensaje.texto = err;
+        }
 
 
     }
@@ -73,6 +75,15 @@ class VentaController {
 
         this.#mensaje.texto = 'Limpieza de ventas realizada!!!';
         
+    }
+
+    ordena(columna) {
+        if(this.#ordenActual == columna) {
+            this.#listaVentas.invierteOrden();
+        } else {
+            this.#listaVentas.ordena((a, b) => a[columna] - b[columna]);    
+        }
+        this.#ordenActual = columna;
     }
 
 }

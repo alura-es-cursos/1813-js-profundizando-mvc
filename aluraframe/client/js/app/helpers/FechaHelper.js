@@ -5,10 +5,10 @@ class FechaHelper {
     }
 
     static textoParaFecha(texto) {
-        if (!/\d{4}-\d{2}-\d{2}/.test(texto))
+        if(!/\d{2}\/\d{2}\/\d{4}/.test(texto))
             throw new Error('El formato de la fecha no es válido');
             
-        return new Date(...texto.split('-')
+        return new Date(...texto.split('/').reverse()
                                     .map((item,index) => (index==1)?item-1:item));
     }
 

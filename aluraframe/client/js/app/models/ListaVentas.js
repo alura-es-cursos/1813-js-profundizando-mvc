@@ -17,4 +17,12 @@ class ListaVentas {
     borra() {
         this._listaVentas = [];
     }
+
+    ordena(criterio) {
+        this._listaVentas.sort(criterio);        
+    }
+
+    invierteOrden() {
+        this._listaVentas.reverse();
+    }
 }
