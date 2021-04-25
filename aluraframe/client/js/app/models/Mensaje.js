@@ -1,7 +1,7 @@
 class Mensaje {
     _texto;
 
-    constructor(texto = ''){
+    constructor(texto){
         this._texto = texto || '';
     }
 
