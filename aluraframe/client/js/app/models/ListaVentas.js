@@ -1,25 +1,20 @@
 class ListaVentas {
-    #listaVentas;
-    #atajo;
+    _listaVentas;
 
     constructor(atajo) {
-        this.#listaVentas = [];
-        this.#atajo = atajo;
+        this._listaVentas = [];
     }
 
     agrega(venta) {
-        this.#listaVentas.push(venta);
-        this.#atajo(this);
-        //Reflect.apply(this.#atajo,this.#contexto,[this]);
+        //this._listaVentas.push(venta);
+        this._listaVentas = [].concat(this._listaVentas,venta);
     }
 
     get listaVentas() {
-        return [].concat(this.#listaVentas);
+        return [].concat(this._listaVentas);
     }
 
     borra() {
-        this.#listaVentas = [];
-        this.#atajo(this);
-        //Reflect.apply(this.#atajo,this.#contexto,[this])
+        this._listaVentas = [];
     }
 }

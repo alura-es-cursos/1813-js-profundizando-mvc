@@ -13,12 +13,24 @@ class VentaController {
         this.#cantidad = $('#cantidad');
         this.#valor = $('#valor');
         console.log(this);//VentaController
-        this.#listaVentas = new ListaVentas(model => 
-            this.#ventasView.update(model)
-        );
         this.#ventasView = new VentasView($('#VentasView'));
+        let self = this;
 
-        this.#ventasView.update(this.#listaVentas);
+        this.#listaVentas = new Proxy(new ListaVentas(),{
+            get: function(target, prop, receiver) { 
+                if(['agrega','borra'].includes(prop) && typeof(target[prop]) == typeof(Function)) {
+                    return function() {
+                        console.log(`Interceptando dentro de función ${prop}`);
+                        Reflect.apply(target[prop],target,arguments);
+                        self.#ventasView.update(target);
+                    }
+                    
+                }
+                return Reflect.get(target, prop, receiver);
+            }
+            
+        });
+
 
         this.#mensaje = new Mensaje();
         this.#mensajeView = new MensajeView($('#MensajeView'));
