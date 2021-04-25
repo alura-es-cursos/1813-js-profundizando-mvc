@@ -1,15 +1,15 @@
 class Mensaje {
-    #texto;
+    _texto;
 
     constructor(texto = ''){
-        this.#texto = texto;
+        this._texto = texto;
     }
 
     get texto(){
-        return this.#texto;
+        return this._texto;
     }
 
     set texto(texto) {
-        this.#texto = texto;
+        this._texto = texto;
     }
 }

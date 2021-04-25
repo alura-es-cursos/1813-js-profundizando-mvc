@@ -13,28 +13,17 @@ class VentaController {
         this.#cantidad = $('#cantidad');
         this.#valor = $('#valor');
         console.log(this);//VentaController
-        this.#ventasView = new VentasView($('#VentasView'));
-        let self = this;
+        
+        this.#listaVentas = new Bind(new ListaVentas(),
+                                new VentasView($('#VentasView')),
+                                'agrega','borra');
+        
+        
 
-        this.#listaVentas = new Proxy(new ListaVentas(),{
-            get: function(target, prop, receiver) { 
-                if(['agrega','borra'].includes(prop) && typeof(target[prop]) == typeof(Function)) {
-                    return function() {
-                        console.log(`Interceptando dentro de función ${prop}`);
-                        Reflect.apply(target[prop],target,arguments);
-                        self.#ventasView.update(target);
-                    }
-                    
-                }
-                return Reflect.get(target, prop, receiver);
-            }
-            
-        });
-
-
-        this.#mensaje = new Mensaje();
-        this.#mensajeView = new MensajeView($('#MensajeView'));
-        this.#mensajeView.update(this.#mensaje);
+        this.#mensaje = new Bind(new Mensaje(),
+                        new MensajeView($('#MensajeView')),
+                        'texto');
+    
     }
 
     agrega(event) {
@@ -43,10 +32,10 @@ class VentaController {
         
                             
         this.#listaVentas.agrega(this.#creaVenta());
-        //this.#ventasView.update(this.#listaVentas);
+        
 
         this.#mensaje.texto = 'Operación realizada correctamente!!!';
-        this.#mensajeView.update(this.#mensaje);
+        
         this.#limpiaFormulario();
 
 
@@ -68,10 +57,10 @@ class VentaController {
 
     borra() {
         this.#listaVentas.borra();
-        //this.#ventasView.update(this.#listaVentas);
+        
 
         this.#mensaje.texto = 'Limpieza de ventas realizada!!!';
-        this.#mensajeView.update(this.#mensaje);
+        
     }
 
 }
