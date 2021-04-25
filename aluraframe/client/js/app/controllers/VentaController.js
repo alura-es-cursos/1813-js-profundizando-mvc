@@ -12,7 +12,10 @@ class VentaController {
         this.#fecha = $('#fecha');
         this.#cantidad = $('#cantidad');
         this.#valor = $('#valor');
-        this.#listaVentas = new ListaVentas();
+        console.log(this);//VentaController
+        this.#listaVentas = new ListaVentas(model => 
+            this.#ventasView.update(model)
+        );
         this.#ventasView = new VentasView($('#VentasView'));
 
         this.#ventasView.update(this.#listaVentas);
@@ -28,7 +31,7 @@ class VentaController {
         
                             
         this.#listaVentas.agrega(this.#creaVenta());
-        this.#ventasView.update(this.#listaVentas);
+        //this.#ventasView.update(this.#listaVentas);
 
         this.#mensaje.texto = 'Operación realizada correctamente!!!';
         this.#mensajeView.update(this.#mensaje);
@@ -49,6 +52,14 @@ class VentaController {
         this.#fecha.value = '';
 
         this.#fecha.focus();
+    }
+
+    borra() {
+        this.#listaVentas.borra();
+        //this.#ventasView.update(this.#listaVentas);
+
+        this.#mensaje.texto = 'Limpieza de ventas realizada!!!';
+        this.#mensajeView.update(this.#mensaje);
     }
 
 }
